@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f90a1f2-5fc6-4805-8c8f-9a804aed6a06" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Robot$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Robot$RobotState.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot$RobotState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Robot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Simulation$ReportDelivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Simulation$ReportDelivery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Simulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Simulation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automail/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automail/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Simulation.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

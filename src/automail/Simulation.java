@@ -181,7 +181,7 @@ public class Simulation {
         System.out.println("The number of package delivered using caution " + ysb);
         System.out.println("The total weight of package delivered normally " + zz);
         System.out.println("The total weight of package delivered using caution " + ysz);
-        System.out.println("Total amount of time on wraping and UNWRAPPING is " + time_wrap_unwrap);
+        System.out.println("Total amount of time on wrapping and unwrapping is " + time_wrap_unwrap);
         System.out.println("Final Delivery time: " + Clock.Time());
         System.out.printf("Final Score: %.2f%n", normal_total_score + fragile_total_score);
     }
