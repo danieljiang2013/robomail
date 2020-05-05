@@ -1,0 +1,265 @@
+package automail;
+
+import exceptions.BreakingFragileItemException;
+import exceptions.ExcessiveDeliveryException;
+import exceptions.ItemTooHeavyException;
+import exceptions.NonFragileItemException;
+import strategies.IMailPool;
+
+import java.security.Key;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
+/**
+ * The robot delivers mail!
+ */
+public class                                                                                                                                                                                                                                                                                                                       Robot {
+
+    static public final int INDIVIDUAL_MAX_WEIGHT = 2000;
+
+    IMailDelivery delivery;
+    protected final String id;
+
+    /**
+     * Possible states the robot can be in
+     */
+    public enum RobotState {DELIVERING, WAITING, RETURNING, WARPING1, WARPING2, UNWARPING}
+
+    public RobotState current_state;
+    public int current_floor;//gai
+    private int destination_floor;
+    private IMailPool mailPool;
+    private boolean receivedDispatch;
+
+    public MailItem deliveryItem = null;//gai
+    public MailItem tube = null;//gai
+    public MailItem SpeialArm = null;//jia
+    public int deliveryCounter;//gai
+    public int fragileCounter;//jia
+    public int deliveryWeight;//jia
+    public int fragileWeight;//jia
+    public int time_on_warp_unwarp;//jia
+
+    /**
+     * Initiates the robot's location at the start to be at the mailroom
+     * also set it to be waiting for mail.
+     *
+     * @param behaviour governs selection of mail items for delivery and behaviour on priority arrivals
+     * @param delivery  governs the final delivery
+     * @param mailPool  is the source of mail items
+     */
+    public Robot(IMailDelivery delivery, IMailPool mailPool) {
+        id = "R" + hashCode();
+        // current_state = RobotState.WAITING;
+        current_state = RobotState.RETURNING;
+        current_floor = Building.MAILROOM_LOCATION;
+        this.delivery = delivery;
+        this.mailPool = mailPool;
+        this.receivedDispatch = false;
+        this.deliveryCounter = 0;
+        this.fragileCounter = 0;
+        deliveryWeight = 0;
+        fragileWeight = 0;
+        time_on_warp_unwarp = 0;
+    }
+
+    public void dispatch() {
+        receivedDispatch = true;
+    }
+
+    /**
+     * This is called on every time step
+     *
+     * @throws ExcessiveDeliveryException if robot delivers more than the capacity of the tube without refilling
+     */
+    public void step() throws ExcessiveDeliveryException {
+        switch (current_state) {
+            /** This state is triggered when the robot is returning to the mailroom after a delivery */
+
+            case RETURNING:
+                /** If its current position is at the mailroom, then the robot should change state */
+                if (current_floor == Building.MAILROOM_LOCATION) {
+                    if (tube != null) {
+                        mailPool.addToPool(tube);
+                        System.out.printf("T: %3d >  +addToPool [%s]%n", Clock.Time(), tube.toString());
+                        tube = null;
+                    }
+                    /** Tell the sorter the robot is ready */
+                    mailPool.registerWaiting(this);
+                    changeState(RobotState.WAITING);
+                } else {
+                    /** If the robot is not at the mailroom floor yet, then move towards it! */
+
+                    moveTowards(Building.MAILROOM_LOCATION);
+                    break;
+                }
+
+            case WAITING://gai
+                /** If the StorageTube is ready and the Robot is waiting in the mailroom then start the delivery */
+                if (!isEmpty() && receivedDispatch) {
+                    receivedDispatch = false;
+                    deliveryCounter = 0;// reset delivery counter
+                    fragileCounter = 0;
+                    setRoute();
+                    if (SpeialArm != null) {
+                        changeState(RobotState.WARPING1);
+                    } else {
+                        changeState(RobotState.DELIVERING);
+                    }
+                }
+                break;
+
+            case WARPING1://jia
+                time_on_warp_unwarp++;
+                changeState(RobotState.WARPING2);
+                break;
+
+            case WARPING2://jia
+                time_on_warp_unwarp++;
+                changeState(RobotState.DELIVERING);
+                break;
+
+            case DELIVERING:
+                if (current_floor == destination_floor) { // If already here drop off either way
+                    /** Delivery complete, report this to the simulator! */
+                    if (SpeialArm != null) {//gai
+                        System.out.println("yes");
+                        changeState(RobotState.UNWARPING);
+                        break;
+                    } else {
+                        delivery.deliver(deliveryItem);
+                        deliveryItem = null;
+                        deliveryCounter++;
+                        deliveryWeight++;
+                    }
+                    if (deliveryCounter > 2) {  // Implies a simulation bug
+                        throw new ExcessiveDeliveryException();
+                    }
+                    /** Check if want to return, i.e. if there is no item in the tube*/
+                    if (tube == null) {
+                        changeState(RobotState.RETURNING);
+                    } else {
+                        /** If there is another item, set the robot's route to the location to deliver the item */
+                        deliveryItem = tube;
+                        tube = null;
+                        setRoute();
+                        changeState(RobotState.DELIVERING);
+                    }
+                } else {//gai
+                    /** The robot is not at the destination yet, move towards it! */
+                    moveTowards(destination_floor);
+                }
+                break;
+
+            case UNWARPING://jia
+                time_on_warp_unwarp++;
+                delivery.deliver(SpeialArm);
+                SpeialArm = null;
+                fragileCounter++;
+                fragileWeight++;
+                if (fragileCounter > 1) {
+                    throw new ExcessiveDeliveryException();
+                }
+                if (deliveryItem == null) {
+                    changeState(RobotState.RETURNING);
+                } else {
+                    changeState(RobotState.DELIVERING);
+                }
+                break;
+        }
+    }
+
+    /**
+     * Sets the route for the robot
+     */
+    private void setRoute() {//gai
+        /** Set the destination floor */
+        if (SpeialArm != null) {
+            destination_floor = SpeialArm.getDestFloor();
+        } else {
+            destination_floor = deliveryItem.getDestFloor();
+        }
+    }
+
+    /**
+     * Generic function that moves the robot towards the destination
+     *
+     * @param destination the floor towards which the robot is moving
+     */
+
+    private void moveTowards(int destination) {//gai
+
+        if (current_floor < destination ) {
+            current_floor++;
+        } else if (current_floor > destination ) {
+            current_floor--;
+        }
+    }
+
+
+    private String getIdTube() {
+        return String.format("%s(%1d,%1d,%1d)%1d", id, (deliveryItem == null ? 0 : 1), (tube == null ? 0 : 1), (SpeialArm == null ? 0 : 1), deliveryCounter + fragileCounter);
+    }
+
+    /**
+     * Prints out the change in state
+     *
+     * @param nextState the state to which the robot is transitioning
+     */
+    private void changeState(RobotState nextState) {
+        // assert (!(deliveryItem == null && tube != null));
+        if (current_state != nextState) {
+            System.out.printf("T: %3d > %7s changed from %s to %s%n", Clock.Time(), getIdTube(), current_state, nextState);
+        }
+        current_state = nextState;
+        if (nextState == RobotState.DELIVERING && SpeialArm != null) {
+            System.out.printf("T: %3d > %9s-> [%s]%n", Clock.Time(), getIdTube(), SpeialArm.toString());
+        } else if (nextState == RobotState.DELIVERING && deliveryItem != null) {
+            System.out.printf("T: %3d > %9s-> [%s]%n", Clock.Time(), getIdTube(), deliveryItem.toString());
+        }
+    }
+
+    public MailItem getTube() {
+        return tube;
+    }
+
+    static private int count = 0;
+    static private Map<Integer, Integer> hashMap = new TreeMap<Integer, Integer>();
+
+    @Override
+    public int hashCode() {
+        Integer hash0 = super.hashCode();
+        Integer hash = hashMap.get(hash0);
+        if (hash == null) {
+            hash = count++;
+            hashMap.put(hash0, hash);
+        }
+        return hash;
+    }
+
+    public boolean isEmpty() {//gai
+        return (deliveryItem == null && tube == null && SpeialArm == null);
+    }
+
+    public void addToHand(MailItem mailItem) throws ItemTooHeavyException, BreakingFragileItemException {
+        assert (deliveryItem == null);
+        if (mailItem.fragile) throw new BreakingFragileItemException();
+        deliveryItem = mailItem;
+        if (deliveryItem.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
+    }
+
+    public void addToTube(MailItem mailItem) throws ItemTooHeavyException, BreakingFragileItemException {
+        assert (tube == null);
+        if (mailItem.fragile) throw new BreakingFragileItemException();
+        tube = mailItem;
+        if (tube.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
+    }
+
+    public void addToSpecial(MailItem mailItem) throws ItemTooHeavyException, NonFragileItemException {//jia
+        assert (SpeialArm == null);
+        if (!mailItem.fragile) throw new NonFragileItemException();
+        SpeialArm = mailItem;
+        if (SpeialArm.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
+    }
+}
