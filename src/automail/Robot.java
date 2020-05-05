@@ -14,7 +14,7 @@ import java.util.TreeMap;
 /**
  * The robot delivers mail!
  */
-public class                                                                                                                                                                                                                                                                                                                       Robot {
+public class Robot {
 
     static public final int INDIVIDUAL_MAX_WEIGHT = 2000;
 
@@ -24,7 +24,7 @@ public class                                                                    
     /**
      * Possible states the robot can be in
      */
-    public enum RobotState {DELIVERING, WAITING, RETURNING, WARPING1, WARPING2, UNWARPING}
+    public enum RobotState {DELIVERING, WAITING, RETURNING, WRAPPING1, WRAPPING2, UNWRAPPING}
 
     public RobotState current_state;
     public int current_floor;//gai
@@ -34,12 +34,12 @@ public class                                                                    
 
     public MailItem deliveryItem = null;//gai
     public MailItem tube = null;//gai
-    public MailItem SpeialArm = null;//jia
+    public MailItem SpecialArm = null;//jia
     public int deliveryCounter;//gai
     public int fragileCounter;//jia
     public int deliveryWeight;//jia
     public int fragileWeight;//jia
-    public int time_on_warp_unwarp;//jia
+    public int time_on_wrap_unwrap;//jia
 
     /**
      * Initiates the robot's location at the start to be at the mailroom
@@ -61,7 +61,7 @@ public class                                                                    
         this.fragileCounter = 0;
         deliveryWeight = 0;
         fragileWeight = 0;
-        time_on_warp_unwarp = 0;
+        time_on_wrap_unwrap = 0;
     }
 
     public void dispatch() {
@@ -102,30 +102,30 @@ public class                                                                    
                     deliveryCounter = 0;// reset delivery counter
                     fragileCounter = 0;
                     setRoute();
-                    if (SpeialArm != null) {
-                        changeState(RobotState.WARPING1);
+                    if (SpecialArm != null) {
+                        changeState(RobotState.WRAPPING1);
                     } else {
                         changeState(RobotState.DELIVERING);
                     }
                 }
                 break;
 
-            case WARPING1://jia
-                time_on_warp_unwarp++;
-                changeState(RobotState.WARPING2);
+            case WRAPPING1://jia
+                time_on_wrap_unwrap++;
+                changeState(RobotState.WRAPPING2);
                 break;
 
-            case WARPING2://jia
-                time_on_warp_unwarp++;
+            case WRAPPING2://jia
+                time_on_wrap_unwrap++;
                 changeState(RobotState.DELIVERING);
                 break;
 
             case DELIVERING:
                 if (current_floor == destination_floor) { // If already here drop off either way
                     /** Delivery complete, report this to the simulator! */
-                    if (SpeialArm != null) {//gai
+                    if (SpecialArm != null) {//gai
                         System.out.println("yes");
-                        changeState(RobotState.UNWARPING);
+                        changeState(RobotState.UNWRAPPING);
                         break;
                     } else {
                         delivery.deliver(deliveryItem);
@@ -152,10 +152,10 @@ public class                                                                    
                 }
                 break;
 
-            case UNWARPING://jia
-                time_on_warp_unwarp++;
-                delivery.deliver(SpeialArm);
-                SpeialArm = null;
+            case UNWRAPPING://jia
+                time_on_wrap_unwrap++;
+                delivery.deliver(SpecialArm);
+                SpecialArm = null;
                 fragileCounter++;
                 fragileWeight++;
                 if (fragileCounter > 1) {
@@ -175,8 +175,8 @@ public class                                                                    
      */
     private void setRoute() {//gai
         /** Set the destination floor */
-        if (SpeialArm != null) {
-            destination_floor = SpeialArm.getDestFloor();
+        if (SpecialArm != null) {
+            destination_floor = SpecialArm.getDestFloor();
         } else {
             destination_floor = deliveryItem.getDestFloor();
         }
@@ -199,7 +199,7 @@ public class                                                                    
 
 
     private String getIdTube() {
-        return String.format("%s(%1d,%1d,%1d)%1d", id, (deliveryItem == null ? 0 : 1), (tube == null ? 0 : 1), (SpeialArm == null ? 0 : 1), deliveryCounter + fragileCounter);
+        return String.format("%s(%1d,%1d,%1d)%1d", id, (deliveryItem == null ? 0 : 1), (tube == null ? 0 : 1), (SpecialArm == null ? 0 : 1), deliveryCounter + fragileCounter);
     }
 
     /**
@@ -213,8 +213,8 @@ public class                                                                    
             System.out.printf("T: %3d > %7s changed from %s to %s%n", Clock.Time(), getIdTube(), current_state, nextState);
         }
         current_state = nextState;
-        if (nextState == RobotState.DELIVERING && SpeialArm != null) {
-            System.out.printf("T: %3d > %9s-> [%s]%n", Clock.Time(), getIdTube(), SpeialArm.toString());
+        if (nextState == RobotState.DELIVERING && SpecialArm != null) {
+            System.out.printf("T: %3d > %9s-> [%s]%n", Clock.Time(), getIdTube(), SpecialArm.toString());
         } else if (nextState == RobotState.DELIVERING && deliveryItem != null) {
             System.out.printf("T: %3d > %9s-> [%s]%n", Clock.Time(), getIdTube(), deliveryItem.toString());
         }
@@ -239,7 +239,7 @@ public class                                                                    
     }
 
     public boolean isEmpty() {//gai
-        return (deliveryItem == null && tube == null && SpeialArm == null);
+        return (deliveryItem == null && tube == null && SpecialArm == null);
     }
 
     public void addToHand(MailItem mailItem) throws ItemTooHeavyException, BreakingFragileItemException {
@@ -257,9 +257,9 @@ public class                                                                    
     }
 
     public void addToSpecial(MailItem mailItem) throws ItemTooHeavyException, NonFragileItemException {//jia
-        assert (SpeialArm == null);
+        assert (SpecialArm == null);
         if (!mailItem.fragile) throw new NonFragileItemException();
-        SpeialArm = mailItem;
-        if (SpeialArm.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
+        SpecialArm = mailItem;
+        if (SpecialArm.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
     }
 }

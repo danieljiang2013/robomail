@@ -31,7 +31,7 @@ public class Simulation {
     public static int ysb = 0;
     public static int zz = 0;
     public static int ysz = 0;
-    public static int time_warp_unwarp;
+    public static int time_wrap_unwrap;
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, NonFragileItemException {
 
@@ -119,7 +119,7 @@ public class Simulation {
                 for (int i = 0; i < robots; i++) {//gai
                     Robot r = automail.robots[i];
                     int laststate=0;
-                    if (r.current_state == Robot.RobotState.UNWARPING) {//如果该机器人正在unwarping，就记录下当前楼层
+                    if (r.current_state == Robot.RobotState.UNWRAPPING) {//如果该机器人正在UNWRAPPING，就记录下当前楼层
                         Occupied.put(r,r.current_floor);
                         laststate=1;
                     }
@@ -153,7 +153,7 @@ public class Simulation {
                     zb++;
                     zz += deliveryItem.weight;
                 } else {
-                    time_warp_unwarp += 3;
+                    time_wrap_unwrap += 3;
                     ysb++;
                     ysz += deliveryItem.weight;
                 }
@@ -181,7 +181,7 @@ public class Simulation {
         System.out.println("The number of package delivered using caution " + ysb);
         System.out.println("The total weight of package delivered normally " + zz);
         System.out.println("The total weight of package delivered using caution " + ysz);
-        System.out.println("Total amount of time on warping and unwarping is " + time_warp_unwarp);
+        System.out.println("Total amount of time on wraping and UNWRAPPING is " + time_wrap_unwrap);
         System.out.println("Final Delivery time: " + Clock.Time());
         System.out.printf("Final Score: %.2f%n", normal_total_score + fragile_total_score);
     }
