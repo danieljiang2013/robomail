@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f90a1f2-5fc6-4805-8c8f-9a804aed6a06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/automail/ReportDelivery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automail.properties" beforeDir="false" afterPath="$PROJECT_DIR$/automail.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/automail/MailGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/MailGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/automail/Simulation$ReportDelivery.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/automail/Simulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Simulation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/strategies/Automail.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/Automail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automail/MailGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/MailGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automail/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategies/Automail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategies/Automail.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="UML Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,8 +66,9 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Simulation">
-    <configuration name="Simulation (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Simulation" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="automail.Simulation" />
+      <module name="P1_Automail" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="automail.*" />
@@ -68,9 +79,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Simulation" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Simulation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="automail.Simulation" />
-      <module name="P1_Automail" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="automail.*" />
@@ -115,7 +125,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
