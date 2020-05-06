@@ -122,7 +122,7 @@ public class Simulation {
 
 
     public static void printResults(ReportDelivery deliveryStats) {
-        if (CAUTION_ENABLED) {
+        if (STATISTICS_ENABLED) {
             System.out.println("T: " + Clock.Time() + " | Simulation complete!");
             System.out.println("The number of package delivered normally " + deliveryStats.getNormalPackages());
             System.out.println("The number of package delivered using caution " + deliveryStats.getCautionPackages());
