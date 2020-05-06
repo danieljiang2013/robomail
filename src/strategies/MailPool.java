@@ -78,13 +78,14 @@ public class MailPool implements IMailPool {
                         if (!m2.fragile) {//m2正常加到tube
                             robot.addToTube(m2);
                             j.remove();
+
                         } else {//m2易碎加到special
-                            
                             robot.addToSpecial(m2);
                             j.remove();
                         }
                     }
-                } else {//m1易碎的情况
+                }
+                else {//m1易碎的情况
                     robot.addToSpecial(m1);
                     j.remove();
                 }

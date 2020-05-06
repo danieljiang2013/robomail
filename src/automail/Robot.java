@@ -25,12 +25,14 @@ public class Robot {
      * Possible states the robot can be in
      */
     public enum RobotState {DELIVERING, WAITING, RETURNING, WRAPPING1, WRAPPING2, UNWRAPPING}
-
+    public enum RobotMode {NORMAL, CAUTION}
     public RobotState current_state;
+    public RobotMode current_mode;
     public int current_floor;//gai
     private int destination_floor;
     private IMailPool mailPool;
     private boolean receivedDispatch;
+
 
     public MailItem deliveryItem = null;//gai
     public MailItem tube = null;//gai
@@ -53,6 +55,12 @@ public class Robot {
     public Robot(ReportDelivery delivery, IMailPool mailPool, boolean CAUTION_ENABLED) {
         id = "R" + hashCode();
         // current_state = RobotState.WAITING;
+        if(CAUTION_ENABLED){
+            current_mode = RobotMode.CAUTION;
+        }
+        else{
+            current_mode = RobotMode.NORMAL;
+        }
         current_state = RobotState.RETURNING;
         current_floor = Building.MAILROOM_LOCATION;
         this.delivery = delivery;
@@ -257,10 +265,12 @@ public class Robot {
         if (tube.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
     }
 
-    public void addToSpecial(MailItem mailItem) throws ItemTooHeavyException, NonFragileItemException {//jia
+    public void addToSpecial(MailItem mailItem) throws ItemTooHeavyException, NonFragileItemException, BreakingFragileItemException{//jia
         assert (SpecialArm == null);
         if (!mailItem.fragile) throw new NonFragileItemException();
         SpecialArm = mailItem;
         if (SpecialArm.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
+        if (current_mode!=RobotMode.CAUTION) throw new BreakingFragileItemException();
     }
+
 }

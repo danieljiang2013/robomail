@@ -110,11 +110,18 @@ public class Simulation {
         while (deliveryStats.getMailDelivered().size() != mailGenerator.MAIL_TO_CREATE) {
             //add mail items to pool
             mailGenerator.step();
+            try {
+                //load robots
+                automail.mailPool.step();
+                //deliver the mail items
+                automail.step();
+            }catch(ItemTooHeavyException|BreakingFragileItemException e){
+                e.printStackTrace();
+                System.out.println("Simulation unable to complete.");
+                System.exit(0);
+            }
 
-            //deliver the mail items
-            automail.step();
             Clock.Tick();
-
         }
         printResults(deliveryStats);
     }

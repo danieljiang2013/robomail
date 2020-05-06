@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f90a1f2-5fc6-4805-8c8f-9a804aed6a06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bin/automail/Robot$RobotMode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/automail.properties" beforeDir="false" afterPath="$PROJECT_DIR$/automail.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/automail/Robot$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/automail/Robot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/automail/Simulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Simulation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/Automail.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/Automail.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/strategies/MailPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/MailPool.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automail/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automail/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Simulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strategies/Automail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategies/Automail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/strategies/MailPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategies/MailPool.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
