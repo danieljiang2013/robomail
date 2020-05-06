@@ -4,10 +4,8 @@ import java.util.LinkedList;
 import java.util.Comparator;
 import java.util.ListIterator;
 
-import automail.Clock;
 import automail.MailItem;
 import automail.Robot;
-import automail.Simulation;
 import exceptions.BreakingFragileItemException;
 import exceptions.ItemTooHeavyException;
 import exceptions.NonFragileItemException;

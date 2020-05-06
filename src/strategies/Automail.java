@@ -1,6 +1,5 @@
 package strategies;
 
-import automail.IMailDelivery;
 import automail.ReportDelivery;
 import automail.Robot;
 import exceptions.BreakingFragileItemException;
