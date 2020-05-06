@@ -1,6 +1,7 @@
 package strategies;
 
 import automail.IMailDelivery;
+import automail.ReportDelivery;
 import automail.Robot;
 import exceptions.BreakingFragileItemException;
 import exceptions.ExcessiveDeliveryException;
@@ -17,7 +18,7 @@ public class Automail {
     public static HashMap<Robot, Integer> Occupied=new HashMap<>();
 
     
-    public Automail(IMailPool mailPool, IMailDelivery delivery, int numRobots) {
+    public Automail(IMailPool mailPool, ReportDelivery delivery, int numRobots, boolean CAUTION_ENABLED) {
     	// Swap between simple provided strategies and your strategies here
 
     	/** Initialize the MailPool */
@@ -25,11 +26,10 @@ public class Automail {
     	
     	/** Initialize robots */
     	robots = new Robot[numRobots];
-    	for (int i = 0; i < numRobots; i++) robots[i] = new Robot(delivery, mailPool);
+    	for (int i = 0; i < numRobots; i++) robots[i] = new Robot(delivery, mailPool, CAUTION_ENABLED);
 
     	this.numRobots=numRobots;
     }
-
 
 
     public void step(){
@@ -39,13 +39,13 @@ public class Automail {
 
             for (int i = 0; i < numRobots; i++) {//gai
                 Robot r = robots[i];
-                int laststate=0;
+                int lastState=0;
                 if (r.current_state == Robot.RobotState.UNWRAPPING) {//如果该机器人正在UNWRAPPING，就记录下当前楼层
-                    Occupied.put(r,r.current_floor);
-                    laststate=1;
+                    Occupied.put(r, r.current_floor);
+                    lastState=1;
                 }
                 r.step();
-                if (laststate==1&&r.current_state== Robot.RobotState.RETURNING) {//如果易碎件放了，就在occupied里移除该项
+                if (lastState==1&&r.current_state== Robot.RobotState.RETURNING) {//如果易碎件放了，就在occupied里移除该项
                     Occupied.remove(r);
                 }
             }
@@ -55,7 +55,6 @@ public class Automail {
             System.exit(0);
         }
 
-      //  mailGenerator.step();
     }
 
 

@@ -7,6 +7,7 @@ import java.util.ListIterator;
 import automail.Clock;
 import automail.MailItem;
 import automail.Robot;
+import automail.Simulation;
 import exceptions.BreakingFragileItemException;
 import exceptions.ItemTooHeavyException;
 import exceptions.NonFragileItemException;
@@ -39,7 +40,7 @@ public class MailPool implements IMailPool {
     private LinkedList<Item> pool;
     private LinkedList<Robot> robots;
 
-    public MailPool(int nrobots) {
+    public MailPool() {
         // Start empty
         pool = new LinkedList<Item>();
         robots = new LinkedList<Robot>();
@@ -78,6 +79,7 @@ public class MailPool implements IMailPool {
                             robot.addToTube(m2);
                             j.remove();
                         } else {//m2易碎加到special
+                            
                             robot.addToSpecial(m2);
                             j.remove();
                         }

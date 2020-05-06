@@ -76,7 +76,7 @@ public class Simulation {
         System.out.println(numRobots);
         assert (numRobots > 0);
         // MailPool
-        IMailPool mailPool = new MailPool(numRobots);
+        IMailPool mailPool = new MailPool();
 
         // End properties
 
@@ -100,7 +100,7 @@ public class Simulation {
 
         ReportDelivery deliveryStats = new ReportDelivery();
 
-        Automail automail = new Automail(mailPool, deliveryStats, numRobots);
+        Automail automail = new Automail(mailPool, deliveryStats, numRobots, CAUTION_ENABLED);
         MailGenerator mailGenerator = new MailGenerator(MAIL_TO_CREATE, MAIL_MAX_WEIGHT, automail.mailPool, seedMap);
 
         /** Initiate all the mail */

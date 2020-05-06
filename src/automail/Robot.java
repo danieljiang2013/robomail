@@ -35,6 +35,7 @@ public class Robot {
     public MailItem deliveryItem = null;//gai
     public MailItem tube = null;//gai
     public MailItem SpecialArm = null;//jia
+
     public int deliveryCounter;//gai
     public int fragileCounter;//jia
     public int deliveryWeight;//jia
@@ -49,7 +50,7 @@ public class Robot {
      * @param delivery  governs the final delivery
      * @param mailPool  is the source of mail items
      */
-    public Robot(IMailDelivery delivery, IMailPool mailPool) {
+    public Robot(ReportDelivery delivery, IMailPool mailPool, boolean CAUTION_ENABLED) {
         id = "R" + hashCode();
         // current_state = RobotState.WAITING;
         current_state = RobotState.RETURNING;
