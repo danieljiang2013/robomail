@@ -13,7 +13,7 @@ public class ReportDelivery implements IMailDelivery {
     private int time_wrap_unwrap = 0;
     private double total_score = 0;
 
-    private static ArrayList<MailItem> MAIL_DELIVERED;
+    private ArrayList<MailItem> MAIL_DELIVERED;
 
     public ReportDelivery(){
         MAIL_DELIVERED = new ArrayList<MailItem>();
