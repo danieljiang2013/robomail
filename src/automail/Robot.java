@@ -49,7 +49,6 @@ public class Robot<get> {
      */
     public Robot(ReportDelivery delivery, IMailPool mailPool, boolean CAUTION_ENABLED) {
         id = "R" + hashCode();
-        // current_state = RobotState.WAITING;
         if(CAUTION_ENABLED){
             current_mode = RobotMode.CAUTION;
         }
@@ -63,9 +62,6 @@ public class Robot<get> {
         this.receivedDispatch = false;
         this.deliveryCounter = 0;
         this.fragileCounter = 0;
-      //  this.deliveryWeight = 0;
-      //  this.fragileWeight = 0;
-       // this.time_on_wrap_unwrap = 0;
     }
 
     public void dispatch() {
@@ -115,13 +111,11 @@ public class Robot<get> {
                 break;
 
             case WRAPPING1://jia
-               // time_on_wrap_unwrap++;
                 delivery.incrementWrapTime(1);
                 changeState(RobotState.WRAPPING2);
                 break;
 
             case WRAPPING2://jia
-              //  time_on_wrap_unwrap++;
                 delivery.incrementWrapTime(1);
                 changeState(RobotState.DELIVERING);
                 break;
@@ -134,7 +128,6 @@ public class Robot<get> {
                         break;
                     } else {
                         delivery.deliver(deliveryItem);
-                       // delivery.incrementWrapTime();
                         deliveryItem = null;
                         deliveryCounter++;
                         //deliveryWeight++;
@@ -159,12 +152,11 @@ public class Robot<get> {
                 break;
 
             case UNWRAPPING://jia
-               // time_on_wrap_unwrap++;
                 delivery.incrementWrapTime(1);
                 delivery.deliver(SpecialArm);
                 SpecialArm = null;
                 fragileCounter++;
-              //  fragileWeight++;
+              // fragileWeight++;
                 if (fragileCounter > 1) {
                     throw new ExcessiveDeliveryException();
                 }

@@ -65,7 +65,6 @@ public class ReportDelivery implements IMailDelivery {
                 normalPackages++;
                 normalWeight += deliveryItem.getWeight();
             } else {
-               // time_wrap_unwrap += 3 ;
                 cautionPackages++;
                 cautionWeight += deliveryItem.getWeight();
             }
