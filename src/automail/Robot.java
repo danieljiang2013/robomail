@@ -187,11 +187,11 @@ public class Robot<get> {
      * @param destination the floor towards which the robot is moving
      */
 
-    private void moveTowards(int destination) {//gai
+   private void moveTowards(int destination) {//the robot cannot enter the floor with an unwarping robot
 
-        if (current_floor < destination ) {
+        if (current_floor < destination && !Automail.unwarping.containsValue(current_floor + 1)) {
             current_floor++;
-        } else if (current_floor > destination ) {
+        } else if (current_floor > destination && !Automail.unwarping.containsValue(current_floor - 1)) {
             current_floor--;
         }
     }
