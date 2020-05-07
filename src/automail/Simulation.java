@@ -112,10 +112,11 @@ public class Simulation {
             mailGenerator.step();
             try {
                 //load robots
-                automail.mailPool.step();
+                //automail.mailPool.step();
                 //deliver the mail items
                 automail.step();
-            }catch(ItemTooHeavyException|BreakingFragileItemException e){
+
+            }catch(ItemTooHeavyException | BreakingFragileItemException | ExcessiveDeliveryException e){
                 e.printStackTrace();
                 System.out.println("Simulation unable to complete.");
                 System.exit(0);

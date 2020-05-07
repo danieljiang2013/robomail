@@ -31,7 +31,7 @@ public class Automail {
     }
 
 
-    public void step(){
+    public void step() throws ExcessiveDeliveryException, ItemTooHeavyException, BreakingFragileItemException, NonFragileItemException{
         try {
             // load robot with mail from the pool
             mailPool.step();
@@ -48,10 +48,8 @@ public class Automail {
                     Occupied.remove(r);
                 }
             }
-        } catch (ExcessiveDeliveryException | ItemTooHeavyException | BreakingFragileItemException | NonFragileItemException e) {
-            e.printStackTrace();
-            System.out.println("Simulation unable to complete.");
-            System.exit(0);
+        } catch (ExcessiveDeliveryException e) {
+            throw e;
         }
 
     }
