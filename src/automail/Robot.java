@@ -32,15 +32,16 @@ public class Robot {
     private boolean receivedDispatch;
 
 
-    public MailItem deliveryItem = null;//gai
-    public MailItem tube = null;//gai
-    public MailItem SpecialArm = null;//jia
+    private MailItem deliveryItem = null;//gai
+    private MailItem tube = null;//gai
+    private MailItem SpecialArm = null;//jia
 
-    public int deliveryCounter;//gai
-    public int fragileCounter;//jia
-    public int deliveryWeight;//jia
-    public int fragileWeight;//jia
-    public int time_on_wrap_unwrap;//jia
+    private int deliveryCounter;//gai
+    private int fragileCounter;//jia
+    
+    private int deliveryWeight;//jia
+    private int fragileWeight;//jia
+    private int time_on_wrap_unwrap;//jia
 
     /**
      * Initiates the robot's location at the start to be at the mailroom

@@ -111,9 +111,7 @@ public class Simulation {
             //add mail items to pool
             mailGenerator.step();
             try {
-                //load robots
-                //automail.mailPool.step();
-                //deliver the mail items
+                //load robots and deliver the mail items
                 automail.step();
 
             }catch(ItemTooHeavyException | BreakingFragileItemException | ExcessiveDeliveryException e){
