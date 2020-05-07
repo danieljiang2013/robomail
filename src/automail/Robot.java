@@ -12,7 +12,7 @@ import java.util.TreeMap;
 /**
  * The robot delivers mail!
  */
-public class Robot {
+public class Robot<get> {
 
     static public final int INDIVIDUAL_MAX_WEIGHT = 2000;
 
@@ -38,10 +38,10 @@ public class Robot {
 
     private int deliveryCounter;//gai
     private int fragileCounter;//jia
-    
-    private int deliveryWeight;//jia
-    private int fragileWeight;//jia
-    private int time_on_wrap_unwrap;//jia
+
+   // private int deliveryWeight;//jia
+   // private int fragileWeight;//jia
+   // private int time_on_wrap_unwrap;//jia
 
     /**
      * Initiates the robot's location at the start to be at the mailroom
@@ -67,9 +67,9 @@ public class Robot {
         this.receivedDispatch = false;
         this.deliveryCounter = 0;
         this.fragileCounter = 0;
-        deliveryWeight = 0;
-        fragileWeight = 0;
-        time_on_wrap_unwrap = 0;
+      //  this.deliveryWeight = 0;
+      //  this.fragileWeight = 0;
+       // this.time_on_wrap_unwrap = 0;
     }
 
     public void dispatch() {
@@ -108,7 +108,7 @@ public class Robot {
                 if (!isEmpty() && receivedDispatch) {
                     receivedDispatch = false;
                     deliveryCounter = 0;// reset delivery counter
-                    fragileCounter = 0;
+                   // fragileCounter = 0;
                     setRoute();
                     if (SpecialArm != null) {
                         changeState(RobotState.WRAPPING1);
@@ -119,12 +119,14 @@ public class Robot {
                 break;
 
             case WRAPPING1://jia
-                time_on_wrap_unwrap++;
+               // time_on_wrap_unwrap++;
+                delivery.incrementWrapTime(1);
                 changeState(RobotState.WRAPPING2);
                 break;
 
             case WRAPPING2://jia
-                time_on_wrap_unwrap++;
+              //  time_on_wrap_unwrap++;
+                delivery.incrementWrapTime(1);
                 changeState(RobotState.DELIVERING);
                 break;
 
@@ -132,14 +134,14 @@ public class Robot {
                 if (current_floor == destination_floor) { // If already here drop off either way
                     /** Delivery complete, report this to the simulator! */
                     if (SpecialArm != null) {//gai
-                        System.out.println("yes");
                         changeState(RobotState.UNWRAPPING);
                         break;
                     } else {
                         delivery.deliver(deliveryItem);
+                       // delivery.incrementWrapTime();
                         deliveryItem = null;
                         deliveryCounter++;
-                        deliveryWeight++;
+                        //deliveryWeight++;
                     }
                     if (deliveryCounter > 2) {  // Implies a simulation bug
                         throw new ExcessiveDeliveryException();
@@ -161,11 +163,12 @@ public class Robot {
                 break;
 
             case UNWRAPPING://jia
-                time_on_wrap_unwrap++;
+               // time_on_wrap_unwrap++;
+                delivery.incrementWrapTime(1);
                 delivery.deliver(SpecialArm);
                 SpecialArm = null;
                 fragileCounter++;
-                fragileWeight++;
+              //  fragileWeight++;
                 if (fragileCounter > 1) {
                     throw new ExcessiveDeliveryException();
                 }
@@ -231,6 +234,7 @@ public class Robot {
     public MailItem getTube() {
         return tube;
     }
+
 
     static private int count = 0;
     static private Map<Integer, Integer> hashMap = new TreeMap<Integer, Integer>();

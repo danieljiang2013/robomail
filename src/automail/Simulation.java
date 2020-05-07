@@ -130,10 +130,10 @@ public class Simulation {
     public static void printResults(ReportDelivery deliveryStats) {
         if (STATISTICS_ENABLED) {
             System.out.println("T: " + Clock.Time() + " | Simulation complete!");
-            System.out.println("The number of package delivered normally " + deliveryStats.getNormalPackages());
-            System.out.println("The number of package delivered using caution " + deliveryStats.getCautionPackages());
-            System.out.println("The total weight of package delivered normally " + deliveryStats.getNormalWeight());
-            System.out.println("The total weight of package delivered using caution " + deliveryStats.getCautionWeight());
+            System.out.println("The number of packages delivered normally " + deliveryStats.getNormalPackages());
+            System.out.println("The number of packages delivered using caution " + deliveryStats.getCautionPackages());
+            System.out.println("The total weight of packages delivered normally " + deliveryStats.getNormalWeight());
+            System.out.println("The total weight of packages delivered using caution " + deliveryStats.getCautionWeight());
             System.out.println("Total amount of time on wrapping and unwrapping is " + deliveryStats.getWrapTime());
             System.out.println("Final Delivery time: " + Clock.Time());
             System.out.printf("Final Score: %.2f%n", deliveryStats.getTotalScore());

@@ -43,6 +43,10 @@ public class ReportDelivery implements IMailDelivery {
         return time_wrap_unwrap;
     }
 
+    public void incrementWrapTime(int time){
+        this.time_wrap_unwrap+=time;
+    }
+
 
     public ArrayList<MailItem> getMailDelivered(){
         return MAIL_DELIVERED;
@@ -59,11 +63,11 @@ public class ReportDelivery implements IMailDelivery {
             total_score += calculateDeliveryScore(deliveryItem);
             if (!deliveryItem.fragile) {
                 normalPackages++;
-                normalWeight += deliveryItem.weight;
+                normalWeight += deliveryItem.getWeight();
             } else {
-                time_wrap_unwrap += 3;
+               // time_wrap_unwrap += 3 ;
                 cautionPackages++;
-                cautionWeight += deliveryItem.weight;
+                cautionWeight += deliveryItem.getWeight();
             }
         } else {
             try {
