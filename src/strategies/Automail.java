@@ -31,25 +31,24 @@ public class Automail {
     }
 
 
-    public void step() throws ExcessiveDeliveryException, ItemTooHeavyException, BreakingFragileItemException, NonFragileItemException{
+   public void step() {
         try {
             // load robot with mail from the pool
-            mailPool.step();
 
-            for (int i = 0; i < numRobots; i++) {//gai
+            for (int i = 0; i < numRobots; i++) {
                 Robot r = robots[i];
-                int lastState=0;
-                if (r.current_state == Robot.RobotState.UNWRAPPING) {//如果该机器人正在UNWRAPPING，就记录下当前楼层
-                    Occupied.put(r, r.current_floor);
-                    lastState=1;
-                }
                 r.step();
-                if (lastState==1&&r.current_state== Robot.RobotState.RETURNING) {//如果易碎件放了，就在occupied里移除该项
-                    Occupied.remove(r);
+                if (r.current_floor == r.destination_floor && r.SpecialArm != null) {//if the robot arrives the destination floor and waits for unwarping just record it
+                    unwarping.put(r, r.current_floor);
+                }
+                if ((r.current_state == Robot.RobotState.DELIVERING || r.current_state == Robot.RobotState.RETURNING)) {//if the robot finish unwarping and change its state just remove the record in the map
+                    unwarping.remove(r);
                 }
             }
         } catch (ExcessiveDeliveryException e) {
-            throw e;
+            e.printStackTrace();
+            System.out.println("Simulation unable to complete.");
+            System.exit(0);
         }
 
     }
