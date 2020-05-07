@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class ReportDelivery implements IMailDelivery {
 
-    public static int normalPackages = 0;
-    public static int cautionPackages = 0;
-    public static int normalWeight = 0;
-    public static int cautionWeight = 0;
-    public static int time_wrap_unwrap;
-    private static double total_score = 0;
+    private int normalPackages = 0;
+    private int cautionPackages = 0;
+    private int normalWeight = 0;
+    private int cautionWeight = 0;
+    private int time_wrap_unwrap = 0;
+    private double total_score = 0;
 
     private static ArrayList<MailItem> MAIL_DELIVERED;
 
