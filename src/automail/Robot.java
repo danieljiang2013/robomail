@@ -31,7 +31,6 @@ public class Robot<get> {
     private IMailPool mailPool;
     private boolean receivedDispatch;
 
-
     private MailItem deliveryItem = null;//gai
     private MailItem tube = null;//gai
     private MailItem SpecialArm = null;//jia
@@ -39,17 +38,14 @@ public class Robot<get> {
     private int deliveryCounter;//gai
     private int fragileCounter;//jia
 
-   // private int deliveryWeight;//jia
-   // private int fragileWeight;//jia
-   // private int time_on_wrap_unwrap;//jia
-
     /**
      * Initiates the robot's location at the start to be at the mailroom
      * also set it to be waiting for mail.
      *
-     * @param behaviour governs selection of mail items for delivery and behaviour on priority arrivals
+     * @param CAUTION_ENABLED whether or not caution mode is on or not
      * @param delivery  governs the final delivery
-     * @param mailPool  is the source of mail items
+     * @param mailPool  is the source of mail
+     *
      */
     public Robot(ReportDelivery delivery, IMailPool mailPool, boolean CAUTION_ENABLED) {
         id = "R" + hashCode();

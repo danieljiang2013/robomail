@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2f90a1f2-5fc6-4805-8c8f-9a804aed6a06" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/IMailDelivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/IMailDelivery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/MailItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/MailItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/ReportDelivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/ReportDelivery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Robot$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Robot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Robot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/automail/Simulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/automail/Simulation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automail/IMailDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/IMailDelivery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automail/MailItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/MailItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automail/ReportDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/ReportDelivery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/automail/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/automail/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/automail/Simulation.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

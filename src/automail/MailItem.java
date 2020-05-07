@@ -21,8 +21,6 @@ public class MailItem {
     /** The fragile property */
     public final boolean fragile;//gai
 
-    private int wrapTime = 0;
-
     /**
      * Constructor for a MailItem
      * @param dest_floor the destination floor intended for this mail item
@@ -73,13 +71,6 @@ public class MailItem {
    public int getWeight(){
        return weight;
    }
-
-
-    /**
-     *
-     * @return the amount of time spent wrapping and unwrapping the item
-     */
-   public int getWrapTime(){ return wrapTime;}
    
 	static private int count = 0;
 	static private Map<Integer, Integer> hashMap = new TreeMap<Integer, Integer>();
