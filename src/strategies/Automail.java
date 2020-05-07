@@ -14,7 +14,7 @@ public class Automail {
     private Robot[] robots;
     public IMailPool mailPool;
     private int numRobots;
-    public static HashMap<Robot, Integer> Occupied=new HashMap<>();
+    public static HashMap<Robot, Integer> unwarping=new HashMap<>();
 
     
     public Automail(IMailPool mailPool, ReportDelivery delivery, int numRobots, boolean CAUTION_ENABLED) {
