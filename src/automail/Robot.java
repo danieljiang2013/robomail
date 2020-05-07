@@ -27,13 +27,13 @@ public class Robot<get> {
     public RobotState current_state;
     public RobotMode current_mode;
     public int current_floor;//gai
-    private int destination_floor;
+    public int destination_floor;
     private IMailPool mailPool;
     private boolean receivedDispatch;
 
     private MailItem deliveryItem = null;//gai
     private MailItem tube = null;//gai
-    private MailItem SpecialArm = null;//jia
+    public MailItem SpecialArm = null;//jia
 
     private int deliveryCounter;//gai
     private int fragileCounter;//jia
